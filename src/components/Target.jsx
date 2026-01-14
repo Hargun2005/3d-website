@@ -1,13 +1,18 @@
-import { useGLTF } from '@react-three/drei';
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
+import { useGLTF } from "@react-three/drei";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const Target = (props) => {
   const targetRef = useRef();
-  const { scene } = useGLTF(
-    'https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/target-stand/model.gltf',
-  );
+  // TODO: Add target-stand model to public/models/ folder
+  // const { scene } = useGLTF('/models/target-stand/model.gltf');
+  // For now, returning null until model is available
+  if (!props.skipRender) {
+    return null;
+  }
+
+  let scene = null;
 
   useGSAP(() => {
     gsap.to(targetRef.current.position, {
